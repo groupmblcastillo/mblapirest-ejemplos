@@ -1,0 +1,314 @@
+{
+  "info": {
+    "name": "mblapirest",
+    "description": "Consulta de DNI/RUC, tipo de cambio SUNAT, validación/descarga de comprobantes electrónicos (CPE), SIRE y emisión de comprobantes. Documentación completa: https://doc.mblapirest.com",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "auth": {
+    "type": "bearer",
+    "bearer": [{ "key": "token", "value": "{{token}}", "type": "string" }]
+  },
+  "variable": [
+    { "key": "base_url", "value": "https://mblapirest.com/api" },
+    { "key": "token", "value": "<tu_token>" }
+  ],
+  "item": [
+    {
+      "name": "DNI",
+      "item": [
+        {
+          "name": "Consultar DNI",
+          "request": {
+            "method": "GET",
+            "url": { "raw": "{{base_url}}/v1/dni/12345678", "host": ["{{base_url}}"], "path": ["v1", "dni", "12345678"] }
+          }
+        },
+        {
+          "name": "Consultar DNI (forzar en vivo)",
+          "request": {
+            "method": "GET",
+            "url": { "raw": "{{base_url}}/v1/dni/12345678/refresh", "host": ["{{base_url}}"], "path": ["v1", "dni", "12345678", "refresh"] }
+          }
+        },
+        {
+          "name": "Buscar DNI por nombre",
+          "request": {
+            "method": "POST",
+            "url": { "raw": "{{base_url}}/v1/dni/buscar-por-nombre", "host": ["{{base_url}}"], "path": ["v1", "dni", "buscar-por-nombre"] },
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                { "key": "nombres", "value": "" },
+                { "key": "apellido_paterno", "value": "" },
+                { "key": "apellido_materno", "value": "" }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "RUC",
+      "item": [
+        {
+          "name": "Consultar RUC",
+          "request": {
+            "method": "GET",
+            "url": { "raw": "{{base_url}}/v1/ruc/20123456789", "host": ["{{base_url}}"], "path": ["v1", "ruc", "20123456789"] }
+          }
+        },
+        {
+          "name": "Consultar RUC en vivo (SUNAT)",
+          "request": {
+            "method": "GET",
+            "url": { "raw": "{{base_url}}/v1/ruc/plus/20123456789", "host": ["{{base_url}}"], "path": ["v1", "ruc", "plus", "20123456789"] }
+          }
+        },
+        {
+          "name": "Consultar RUC por DNI del titular",
+          "request": {
+            "method": "GET",
+            "url": { "raw": "{{base_url}}/v1/ruc/dni/12345678", "host": ["{{base_url}}"], "path": ["v1", "ruc", "dni", "12345678"] }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Tipo de Cambio",
+      "item": [
+        {
+          "name": "Consultar tipo de cambio",
+          "request": {
+            "method": "POST",
+            "url": { "raw": "{{base_url}}/v1/tipo-de-cambio", "host": ["{{base_url}}"], "path": ["v1", "tipo-de-cambio"] },
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [{ "key": "fecha", "value": "2026-07-23", "description": "YYYY-MM-DD" }]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "CPE (comprobantes electrónicos)",
+      "item": [
+        {
+          "name": "Validar comprobante",
+          "request": {
+            "method": "POST",
+            "url": { "raw": "{{base_url}}/v1/cpe/validar", "host": ["{{base_url}}"], "path": ["v1", "cpe", "validar"] },
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                { "key": "ruc", "value": "20123456789" },
+                { "key": "document_type", "value": "01", "description": "01=Factura, 03=Boleta, 07=NC, 08=ND" },
+                { "key": "serie", "value": "F001" },
+                { "key": "numero", "value": "123" },
+                { "key": "fecha", "value": "2026-07-23" },
+                { "key": "monto", "value": "118.00" }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Validar comprobantes en lote (máx. 150)",
+          "request": {
+            "method": "POST",
+            "url": { "raw": "{{base_url}}/v1/cpe/validar-masivo", "host": ["{{base_url}}"], "path": ["v1", "cpe", "validar-masivo"] },
+            "body": {
+              "mode": "raw",
+              "options": { "raw": { "language": "json" } },
+              "raw": "{\n  \"data\": [\n    { \"ruc\": \"20123456789\", \"document_type\": \"01\", \"serie\": \"F001\", \"numero\": \"123\", \"fecha\": \"2026-07-23\", \"monto\": \"118.00\" }\n  ]\n}"
+            }
+          }
+        },
+        {
+          "name": "Descargar CDR",
+          "request": {
+            "method": "POST",
+            "url": { "raw": "{{base_url}}/v1/cpe/descargar-cdr", "host": ["{{base_url}}"], "path": ["v1", "cpe", "descargar-cdr"] },
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                { "key": "ruc", "value": "20123456789" },
+                { "key": "tipodocumento", "value": "01" },
+                { "key": "serie", "value": "F001" },
+                { "key": "numero", "value": "123" },
+                { "key": "usuario_sol", "value": "", "description": "Opcional si ya configuraste tus credenciales SOL en tu cuenta" },
+                { "key": "clave_sol", "value": "" }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Descargar XML",
+          "request": {
+            "method": "POST",
+            "url": { "raw": "{{base_url}}/v1/cpe/descargar-xml", "host": ["{{base_url}}"], "path": ["v1", "cpe", "descargar-xml"] },
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                { "key": "ruc_emisor", "value": "20123456789" },
+                { "key": "serie", "value": "F001" },
+                { "key": "numero", "value": "123" },
+                { "key": "proceso", "value": "VENTAS", "description": "VENTAS o COMPRAS" }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Descargar PDF",
+          "request": {
+            "method": "POST",
+            "url": { "raw": "{{base_url}}/v1/cpe/descargar-pdf", "host": ["{{base_url}}"], "path": ["v1", "cpe", "descargar-pdf"] },
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                { "key": "ruc_emisor", "value": "20123456789" },
+                { "key": "serie", "value": "F001" },
+                { "key": "numero", "value": "123" },
+                { "key": "proceso", "value": "VENTAS", "description": "VENTAS o COMPRAS" }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "SIRE (RVIE / RCE)",
+      "item": [
+        {
+          "name": "Ventas: listar periodos",
+          "request": {
+            "method": "GET",
+            "url": { "raw": "{{base_url}}/v1/sire/ventas/periodos", "host": ["{{base_url}}"], "path": ["v1", "sire", "ventas", "periodos"] }
+          }
+        },
+        {
+          "name": "Ventas: solicitar ticket de propuesta",
+          "request": {
+            "method": "POST",
+            "url": { "raw": "{{base_url}}/v1/sire/ventas/ticket", "host": ["{{base_url}}"], "path": ["v1", "sire", "ventas", "ticket"] },
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [{ "key": "periodo", "value": "202607", "description": "YYYYMM" }]
+            }
+          }
+        },
+        {
+          "name": "Ventas: descargar propuesta",
+          "request": {
+            "method": "POST",
+            "url": { "raw": "{{base_url}}/v1/sire/ventas/propuesta", "host": ["{{base_url}}"], "path": ["v1", "sire", "ventas", "propuesta"] },
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [{ "key": "num_ticket", "value": "" }]
+            }
+          }
+        },
+        {
+          "name": "Ventas: detalle (JSON curado)",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{base_url}}/v1/sire/ventas/detalle?periodo=202607&pagina=1&por_pagina=100",
+              "host": ["{{base_url}}"],
+              "path": ["v1", "sire", "ventas", "detalle"],
+              "query": [
+                { "key": "periodo", "value": "202607" },
+                { "key": "pagina", "value": "1" },
+                { "key": "por_pagina", "value": "100" }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Compras: listar periodos",
+          "request": {
+            "method": "GET",
+            "url": { "raw": "{{base_url}}/v1/sire/compras/periodos", "host": ["{{base_url}}"], "path": ["v1", "sire", "compras", "periodos"] }
+          }
+        },
+        {
+          "name": "Compras: solicitar ticket de propuesta",
+          "request": {
+            "method": "POST",
+            "url": { "raw": "{{base_url}}/v1/sire/compras/ticket", "host": ["{{base_url}}"], "path": ["v1", "sire", "compras", "ticket"] },
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [{ "key": "periodo", "value": "202607", "description": "YYYYMM" }]
+            }
+          }
+        },
+        {
+          "name": "Compras: descargar propuesta",
+          "request": {
+            "method": "POST",
+            "url": { "raw": "{{base_url}}/v1/sire/compras/propuesta", "host": ["{{base_url}}"], "path": ["v1", "sire", "compras", "propuesta"] },
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [{ "key": "num_ticket", "value": "" }]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Emisión de comprobantes",
+      "item": [
+        {
+          "name": "Ping (verificar conexión)",
+          "request": {
+            "method": "GET",
+            "url": { "raw": "{{base_url}}/v1/emision/ping", "host": ["{{base_url}}"], "path": ["v1", "emision", "ping"] }
+          }
+        },
+        {
+          "name": "Ver info de mi certificado digital",
+          "request": {
+            "method": "GET",
+            "url": { "raw": "{{base_url}}/v1/emision/certificado", "host": ["{{base_url}}"], "path": ["v1", "emision", "certificado"] }
+          }
+        },
+        {
+          "name": "Firmar comprobante",
+          "request": {
+            "method": "POST",
+            "url": { "raw": "{{base_url}}/v1/emision/firmar", "host": ["{{base_url}}"], "path": ["v1", "emision", "firmar"] },
+            "body": {
+              "mode": "raw",
+              "options": { "raw": { "language": "json" } },
+              "raw": "{\n  \"id_tipodoc_electronico\": \"01\",\n  \"serie_comprobante\": \"F001\",\n  \"numero_comprobante\": 123,\n  \"xml_sin_firmar\": \"<base64 de tu XML UBL 2.1 sin firmar — ver doc.mblapirest.com/emision>\"\n}"
+            }
+          }
+        },
+        {
+          "name": "Enviar a SUNAT (tras firmar)",
+          "request": {
+            "method": "POST",
+            "url": { "raw": "{{base_url}}/v1/emision/enviar", "host": ["{{base_url}}"], "path": ["v1", "emision", "enviar"] },
+            "body": {
+              "mode": "raw",
+              "options": { "raw": { "language": "json" } },
+              "raw": "{\n  \"id_tipodoc_electronico\": \"01\",\n  \"serie_comprobante\": \"F001\",\n  \"numero_comprobante\": 123\n}"
+            }
+          }
+        },
+        {
+          "name": "Listar mis documentos emitidos",
+          "request": {
+            "method": "GET",
+            "url": { "raw": "{{base_url}}/v1/emision/documentos", "host": ["{{base_url}}"], "path": ["v1", "emision", "documentos"] }
+          }
+        },
+        {
+          "name": "Detalle de un documento",
+          "request": {
+            "method": "GET",
+            "url": { "raw": "{{base_url}}/v1/emision/documentos/01/F001/123", "host": ["{{base_url}}"], "path": ["v1", "emision", "documentos", "01", "F001", "123"] }
+          }
+        }
+      ]
+    }
+  ]
+}

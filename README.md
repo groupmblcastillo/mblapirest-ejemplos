@@ -19,6 +19,7 @@ API peruana de consulta de DNI/RUC, tipo de cambio SUNAT y validación de compro
 
 - [Autenticación](#autenticación)
 - [Endpoints cubiertos](#endpoints-cubiertos-aquí)
+- [Colección Postman](#colección-postman)
 - [Lenguajes disponibles](#lenguajes-disponibles)
 - [Soporte](#soporte)
 
@@ -42,6 +43,10 @@ Obtienes tu token al crear tu cuenta en el panel (`Mi cuenta` → `Token de API`
 | Validar comprobante | `POST` | `/v1/cpe/validar` | `ruc, document_type, serie, numero, fecha, monto` |
 
 Base URL: `https://mblapirest.com/api`
+
+## Colección Postman
+
+Importa [`postman/mblapirest.postman_collection.json`](postman/mblapirest.postman_collection.json) y el entorno [`postman/mblapirest.postman_environment.json`](postman/mblapirest.postman_environment.json) para probar todos los endpoints (DNI, RUC, tipo de cambio, CPE, SIRE y emisión) sin escribir código. Solo edita la variable `token` del entorno con el tuyo.
 
 ## Lenguajes disponibles
 
