@@ -33,6 +33,8 @@ Authorization: Bearer <tu_token>
 
 Obtienes tu token al crear tu cuenta en el panel (`Mi cuenta` → `Token de API`). Puedes regenerarlo en cualquier momento si se te compromete.
 
+[Registrarte](https://mblapirest.com/api/registro) no cuesta nada: el plan gratuito ya incluye un token funcional para empezar a probar. Si luego necesitas más consultas al mes, puedes subir a un plan pago desde el mismo panel.
+
 ## Endpoints cubiertos aquí
 
 | Servicio | Método | Endpoint | Cuerpo (form-urlencoded) |
