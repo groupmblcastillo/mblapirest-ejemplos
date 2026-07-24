@@ -43,6 +43,7 @@ Obtienes tu token al crear tu cuenta en el panel (`Mi cuenta` → `Token de API`
 | Consulta RUC | `GET` | `/v1/ruc/{numero}` | — |
 | Tipo de cambio | `POST` | `/v1/tipo-de-cambio` | `fecha=YYYY-MM-DD` |
 | Validar comprobante | `POST` | `/v1/cpe/validar` | `ruc, document_type, serie, numero, fecha, monto` |
+| Enviar WhatsApp | `POST` | `/v1/whatsapp/enviar-texto` | `account_id (opcional), numero, mensaje` |
 
 Base URL: `https://mblapirest.com/api`
 
@@ -52,7 +53,7 @@ Importa [`postman/mblapirest.postman_collection.json`](postman/mblapirest.postma
 
 ## Lenguajes disponibles
 
-`curl/`, `php/`, `python/` y `node/` traen los 4 endpoints de la tabla completos. El resto trae consulta de DNI y RUC —los dos servicios más usados— para que arranques rápido en tu lenguaje preferido.
+`curl/`, `php/`, `python/` y `node/` traen los 5 endpoints de la tabla completos. El resto trae consulta de DNI y RUC —los dos servicios más usados— para que arranques rápido en tu lenguaje preferido.
 
 | Lenguaje | Carpeta | Cliente HTTP usado |
 |---|---|---|

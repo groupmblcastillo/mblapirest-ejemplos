@@ -309,6 +309,91 @@
           }
         }
       ]
+    },
+    {
+      "name": "WhatsApp",
+      "item": [
+        {
+          "name": "Listar mis cuentas",
+          "request": {
+            "method": "GET",
+            "url": { "raw": "{{base_url}}/v1/whatsapp/cuentas", "host": ["{{base_url}}"], "path": ["v1", "whatsapp", "cuentas"] }
+          }
+        },
+        {
+          "name": "Vincular numero (alta de cuenta)",
+          "request": {
+            "method": "POST",
+            "url": { "raw": "{{base_url}}/v1/whatsapp/cuentas", "host": ["{{base_url}}"], "path": ["v1", "whatsapp", "cuentas"] },
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [{ "key": "phone_number", "value": "51999999999" }]
+            }
+          }
+        },
+        {
+          "name": "Obtener QR para vincular",
+          "request": {
+            "method": "GET",
+            "url": { "raw": "{{base_url}}/v1/whatsapp/cuentas/1/qr", "host": ["{{base_url}}"], "path": ["v1", "whatsapp", "cuentas", "1", "qr"] }
+          }
+        },
+        {
+          "name": "Estado de la conexion",
+          "request": {
+            "method": "GET",
+            "url": { "raw": "{{base_url}}/v1/whatsapp/cuentas/1/estado", "host": ["{{base_url}}"], "path": ["v1", "whatsapp", "cuentas", "1", "estado"] }
+          }
+        },
+        {
+          "name": "Enviar texto",
+          "request": {
+            "method": "POST",
+            "url": { "raw": "{{base_url}}/v1/whatsapp/enviar-texto", "host": ["{{base_url}}"], "path": ["v1", "whatsapp", "enviar-texto"] },
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                { "key": "account_id", "value": "1", "description": "Opcional si solo tienes una cuenta vinculada" },
+                { "key": "numero", "value": "51999999999" },
+                { "key": "mensaje", "value": "Hola, este es un mensaje de prueba" }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Enviar ubicacion",
+          "request": {
+            "method": "POST",
+            "url": { "raw": "{{base_url}}/v1/whatsapp/enviar-ubicacion", "host": ["{{base_url}}"], "path": ["v1", "whatsapp", "enviar-ubicacion"] },
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                { "key": "account_id", "value": "1" },
+                { "key": "numero", "value": "51999999999" },
+                { "key": "latitud", "value": "-16.409047" },
+                { "key": "longitud", "value": "-71.537451" },
+                { "key": "nombre", "value": "Arequipa, Peru" }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Enviar contacto",
+          "request": {
+            "method": "POST",
+            "url": { "raw": "{{base_url}}/v1/whatsapp/enviar-contacto", "host": ["{{base_url}}"], "path": ["v1", "whatsapp", "enviar-contacto"] },
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                { "key": "account_id", "value": "1" },
+                { "key": "numero", "value": "51999999999" },
+                { "key": "contacto_nombre", "value": "Soporte MBL" },
+                { "key": "contacto_numero", "value": "51939395740" }
+              ]
+            }
+          }
+        }
+      ]
     }
   ]
 }
