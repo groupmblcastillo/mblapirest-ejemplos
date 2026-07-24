@@ -80,10 +80,13 @@ Atención las 24 horas, los 365 días del año.
 
 | Canal | Contacto |
 |---|---|
-| WhatsApp | [+51 939 395 740](https://api.whatsapp.com/send?phone=51939395740&text=Hola%20deseo%20informaci%C3%B3n%20del%20servicio%20de%20facturaci%C3%B3n%20electr%C3%B3nica:) |
-| Soporte | soporte@mblsoftware.com |
-| Ventas | ventas@mblsoftware.com |
+| WhatsApp Soporte | [+51 939 395 740](https://api.whatsapp.com/send?phone=51939395740&text=Hola%20deseo%20informaci%C3%B3n%20del%20servicio%20de%20facturaci%C3%B3n%20electr%C3%B3nica:) |
+| Correo Soporte | soporte@mblsoftware.com |
+| WhatsApp Ventas | [+51 991 973 415](https://api.whatsapp.com/send?phone=51991973415&text=Hola%2C%20deseo%20informaci%C3%B3n%20sobre%20planes%20y%20precios) |
+| Correo Ventas | ventas@mblsoftware.com |
 | Desarrollo | developer@mblsoftware.com |
+
+**Redes sociales**: [Facebook](https://www.facebook.com/mblfacturador/) · [Instagram](https://www.instagram.com/mblfacturador) · [YouTube](https://www.youtube.com/channel/UCbQA7jfc1qvYFdAXR-CRlOQ)
 
 ---
 
